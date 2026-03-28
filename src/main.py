@@ -19,29 +19,28 @@ def build_demo() -> str:
     bus = MessageBus()
     orchestrator = Orchestrator(session=session, bus=bus)
 
-    orchestrator.run_wave(
+    first_turn = orchestrator.run_wave(
         {
             "Run": "J'ouvre le tour et je fixe l'objectif commun.",
             "Rex": "Je propose la structure technique minimale pour la conversation parallèle.",
-            "Rio": "Je vérifie déjà la lisibilité et la cohérence de la base.",
-        }
-    )
-
-    orchestrator.run_wave(
-        {
-            "Run": "Nous pouvons maintenant clarifier les règles de prise de parole.",
-            "Rex": "Le bus et l'orchestrateur sont prêts à évoluer vers de vraies interactions.",
-            "Rio": "La démo reste simple, mais elle montre bien la logique par vagues.",
-        }
-    )
-
-    orchestrator.run_wave(
-        {
-            "Run": "Prochaine étape: brancher de vrais agents ou une stratégie plus riche.",
-            "Rex": "On pourra ensuite ajouter priorités, files et filtres.",
-            "Rio": "La sortie finale est maintenant lisible comme démonstration du parallélisme.",
         },
-        category="summary",
+        category="seed-wave",
+    )
+
+    orchestrator.run_dependent_wave(
+        {
+            "Rio": "Après lecture du tour {source_turn}, je valide la cohérence suivante : {context}",
+            "Rune": "Après lecture du tour {source_turn}, je prépare le chemin d'exécution suivant : {context}",
+        },
+        source_turn=first_turn,
+        category="dependent-review",
+    )
+
+    orchestrator.run_dependent_wave(
+        {
+            "Run": "Je résume ce qui ressort du tour {source_turn} et j'annonce la suite : {context}",
+        },
+        category="orchestrator-summary",
     )
 
     return orchestrator.transcript()
