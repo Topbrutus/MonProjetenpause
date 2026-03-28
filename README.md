@@ -5,7 +5,6 @@ MonDeuxiemeProjet est le nouveau projet centré sur une capacité absente du pre
 ## Objectif
 
 Construire une base technique et conceptuelle pour :
-
 - faire converser plusieurs GPT en parallèle ;
 - garder une trace claire des messages, tours et rôles ;
 - préparer une orchestration où plusieurs agents peuvent parler sans se marcher dessus ;
@@ -43,10 +42,17 @@ La première démonstration doit montrer qu'une session peut :
 3. exécuter plusieurs tours ;
 4. produire une sortie lisible de la conversation parallèle.
 
+## Première règle d’orchestration ajoutée
+
+Le projet montre maintenant deux comportements distincts :
+- une **vague libre**, où plusieurs agents publient dans le même tour ;
+- une **vague dépendante**, où certains agents ne parlent qu'après lecture du tour précédent.
+
+Cette deuxième règle matérialise la première vraie coordination entre agents.
+
 ## Prochaine étape logique
 
 Valider la structure de base, puis brancher une vraie stratégie de tours parallèles et des règles anti-collision de parole.
-
 
 ## Lancer la démo
 
@@ -54,4 +60,4 @@ Valider la structure de base, puis brancher une vraie stratégie de tours parall
 python src/main.py
 ```
 
-La sortie attendue est une transcription lisible d'une session où plusieurs agents publient dans les mêmes tours.
+La sortie attendue est une transcription lisible d'une session où plusieurs agents publient dans les mêmes tours, avec une partie dépendante fondée sur la vague précédente.
