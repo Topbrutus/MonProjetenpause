@@ -46,3 +46,12 @@ La première démonstration doit montrer qu'une session peut :
 ## Prochaine étape logique
 
 Valider la structure de base, puis brancher une vraie stratégie de tours parallèles et des règles anti-collision de parole.
+
+
+## Lancer la démo
+
+```bash
+python src/main.py
+```
+
+La sortie attendue est une transcription lisible d'une session où plusieurs agents publient dans les mêmes tours.
